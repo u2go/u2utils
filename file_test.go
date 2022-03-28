@@ -1,6 +1,7 @@
 package u2utils
 
 import (
+	"path/filepath"
 	"testing"
 )
 
@@ -25,7 +26,11 @@ func TestFileExistsParent(t *testing.T) {
 				t.Errorf("FileExistsParent() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if got != tt.want {
+			want, err := filepath.Abs(tt.want)
+			if err != nil {
+				t.Errorf("FileExistsParent() error = %v, wantErr %v", err, tt.want)
+			}
+			if got != want {
 				t.Errorf("FileExistsParent() got = %v, want %v", got, tt.want)
 			}
 		})

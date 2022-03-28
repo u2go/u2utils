@@ -19,8 +19,15 @@ func FileExists(filename string) (bool, error) {
 }
 
 func FileExistsParent(dir, filename string) (string, error) {
+	dir, err := filepath.Abs(dir)
+	if err != nil {
+		return "", nil
+	}
 	for i := 0; i < 100; i++ {
-		filename1 := path.Join(dir, filename)
+		filename1, err := filepath.Abs(path.Join(dir, filename))
+		if err != nil {
+			return "", err
+		}
 		exists, err := FileExists(filename1)
 		// 出错了
 		if err != nil {
