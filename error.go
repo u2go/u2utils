@@ -22,7 +22,7 @@ func RecoverError(e interface{}, err error) error {
 		if err != nil {
 			return multierr.Combine(err, err1)
 		} else {
-			return err
+			return err1
 		}
 	} else {
 		return err
