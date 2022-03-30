@@ -2,6 +2,7 @@ package u2utils
 
 import (
 	"github.com/pkg/errors"
+	"github.com/ztrue/tracerr"
 	"go.uber.org/multierr"
 )
 
@@ -27,4 +28,8 @@ func RecoverError(e interface{}, err error) error {
 	} else {
 		return err
 	}
+}
+
+func PrintError(err error) {
+	tracerr.PrintSourceColor(err, 1)
 }
