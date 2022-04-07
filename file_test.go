@@ -1,6 +1,7 @@
 package u2utils
 
 import (
+	"fmt"
 	"path/filepath"
 	"testing"
 )
@@ -35,4 +36,8 @@ func TestFileExistsParent(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestFileListAll(t *testing.T) {
+	fmt.Println(FileListAll("."))
 }

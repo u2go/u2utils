@@ -5,6 +5,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"strings"
 )
 
 func FileExists(filename string) (bool, error) {
@@ -44,4 +45,23 @@ func FileExistsParent(dir, filename string) (string, error) {
 		dir = dir1
 	}
 	return "", errors.New("no file found until max loop")
+}
+
+func FileListAll(dir string) ([]string, error) {
+	var files []string
+	err := filepath.Walk(dir,
+		func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if info.IsDir() {
+				return nil
+			}
+			files = append(files, strings.ReplaceAll(path, "\\", "/"))
+			return nil
+		})
+	if err != nil {
+		return nil, err
+	}
+	return files, nil
 }
