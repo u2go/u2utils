@@ -12,3 +12,11 @@ func JsonLoadFromFile(file string, value any) error {
 	}
 	return json.Unmarshal(b, value)
 }
+
+func JsonTypeConvert(in interface{}, out interface{}) error {
+	b, err := json.Marshal(in)
+	if err != nil {
+		return err
+	}
+	return json.Unmarshal(b, out)
+}
