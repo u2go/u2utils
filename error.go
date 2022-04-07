@@ -12,7 +12,7 @@ func PanicOnError(err error) {
 	}
 }
 
-func RecoverError(e interface{}, err error) error {
+func RecoverError(e any, err error) error {
 	if e != nil {
 		var err1 error
 		if err0, ok := e.(error); ok {
