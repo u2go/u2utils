@@ -8,6 +8,7 @@ require (
 	github.com/satori/go.uuid v1.2.0
 	github.com/ztrue/tracerr v0.3.0
 	go.uber.org/multierr v1.8.0
+	golang.org/x/text v0.3.0
 )
 
 require (
