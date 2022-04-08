@@ -65,3 +65,8 @@ func FileListAll(dir string) ([]string, error) {
 	}
 	return files, nil
 }
+
+func FileMkdirAll(dir string) error {
+	// todo umask
+	return os.MkdirAll(dir, 0777)
+}
