@@ -2,11 +2,9 @@ package u2utils
 
 import (
 	"encoding/json"
-	"io/fs"
 	"io/ioutil"
 	"os"
 	"path"
-	"syscall"
 )
 
 var tmpDir = path.Join(os.TempDir(), "u2-tmp-cache")
@@ -17,12 +15,15 @@ func getFile(key string) string {
 
 func TmpCacheGet(key string, valP any) error {
 	file := getFile(key)
+	exists, err := FileExists(file)
+	if err != nil {
+		return err
+	}
+	if !exists {
+		return nil
+	}
 	b, err := ioutil.ReadFile(file)
 	if err != nil {
-		if err1, ok := err.(*fs.PathError); ok &&
-			err1.Err == syscall.ERROR_FILE_NOT_FOUND {
-			return nil
-		}
 		return err
 	}
 	err = json.Unmarshal(b, valP)
