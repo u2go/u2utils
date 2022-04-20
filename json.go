@@ -2,6 +2,7 @@ package u2utils
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 )
 
@@ -19,4 +20,22 @@ func JsonTypeConvert(in any, out any) error {
 		return err
 	}
 	return json.Unmarshal(b, out)
+}
+
+func PrintJson(data any) {
+	b, err := json.Marshal(data)
+	if err != nil {
+		fmt.Println("PrintJson Error: ", err.Error())
+		return
+	}
+	fmt.Println(string(b))
+}
+
+func PrintJsonPretty(data any) {
+	b, err := json.MarshalIndent(data, "", "  ")
+	if err != nil {
+		fmt.Println("PrintJsonPretty Error: ", err.Error())
+		return
+	}
+	fmt.Println(string(b))
 }
