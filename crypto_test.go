@@ -21,3 +21,30 @@ func TestSHA256(t *testing.T) {
 		})
 	}
 }
+
+func TestMd5(t *testing.T) {
+	type args struct {
+		data string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    string
+		wantErr bool
+	}{
+		{"hello", args{"hello"}, "5d41402abc4b2a76b9719d911017c592", false},
+		{"<empty string>", args{""}, "d41d8cd98f00b204e9800998ecf8427e", false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := Md5(tt.args.data)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Md5() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got != tt.want {
+				t.Errorf("Md5() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
